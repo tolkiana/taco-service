@@ -1,16 +1,12 @@
 package com.tolkiana.taco.tacoservice
 
 import org.apache.commons.io.IOUtils
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ResourceLoader
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ProductController {
-
-    @Autowired
-    private var resourceLoader: ResourceLoader? = null
+class ProductController(val resourceLoader: ResourceLoader) {
 
     @GetMapping("/tacos")
     fun getTacos(): String {
@@ -28,7 +24,7 @@ class ProductController {
     }
 
     private fun getStringResource(file: String): String {
-        val resource = resourceLoader?.getResource(file)
+        val resource = resourceLoader.getResource(file)
         val inputStream = resource?.inputStream
         return IOUtils.toString(inputStream)
     }
