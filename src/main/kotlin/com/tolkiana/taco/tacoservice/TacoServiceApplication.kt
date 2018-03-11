@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class TacoServiceApplication
+open class TacoServiceApplication
 
 fun main(args: Array<String>) {
     SpringApplication.run(TacoServiceApplication::class.java, *args)
