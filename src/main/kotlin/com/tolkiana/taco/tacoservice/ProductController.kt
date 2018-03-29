@@ -24,6 +24,11 @@ class ProductController(private val resourceLoader: ResourceLoader) {
         return getStringResource("classpath:/salsas.json")
     }
 
+    @GetMapping("/facts", produces = arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    fun getFacts(): String {
+        return getStringResource("classpath:/facts.json")
+    }
+
     private fun getStringResource(file: String): String {
         val resource = resourceLoader.getResource(file)
         val inputStream = resource?.inputStream
