@@ -1,6 +1,7 @@
 package com.tolkiana.taco.tacoservice.recipe.spoonacular
 
 import com.tolkiana.taco.tacoservice.dto.Product
+import com.tolkiana.taco.tacoservice.recipe.RecipeNotFoundException
 import com.tolkiana.taco.tacoservice.recipe.RecipeService
 import com.tolkiana.taco.tacoservice.recipe.spoonacular.dto.Recipe
 import org.springframework.stereotype.Service
@@ -18,6 +19,11 @@ class SpoonacularRecipeService(private val client: SpoonacularClient,
         val host = config.host ?: throw IllegalStateException(invalidConfigurationMessage)
 
         val search = client.searchRecipe(key, host, productSearch)
+
+        if (search.results.isEmpty()) {
+            throw RecipeNotFoundException()
+        }
+
         val recipe = client.getRecipe(key, host, search.results.first().id)
         return mapper.apply(recipe)
     }

@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/*.jar --cloud.aws.credentials.accessKey=$S3_ACCESS_KEY --cloud.aws.credentials.secretKey=$S3_SECRET_KEY --spoonacular.key=$SPOONACULAR_KEY
