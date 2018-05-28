@@ -1,0 +1,14 @@
+spoonacular:
+  key: 'ENTER_KEY_HERE'
+  host: spoonacular-recipe-food-nutrition-v1.p.mashape.com
+
+feign:
+  client:
+    config:
+      spoonacular:
+        url: "https://${spoonacular.host}/"
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: BASIC
+        encoder: feign.jackson.JacksonEncoder
+        decoder: feign.jackson.JacksonDecoder
