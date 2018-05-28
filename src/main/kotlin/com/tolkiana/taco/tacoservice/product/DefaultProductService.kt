@@ -12,7 +12,7 @@ class DefaultProductService(val resourceService: ResourceService) : ProductServi
     private var products = ConcurrentHashMap<ProductType, List<Product>>()
 
     @PostConstruct
-    fun loadProducts() {
+    override fun loadProducts() {
         ProductType.values().forEach {
             products[it] = resourceService.getProducts(it.file)
         }
