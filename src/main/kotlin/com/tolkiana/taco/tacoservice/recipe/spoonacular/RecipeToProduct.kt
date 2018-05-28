@@ -12,8 +12,8 @@ class RecipeToProduct : Function<Recipe, Product> {
     override fun apply(recipe: Recipe): Product {
         val ingredients = recipe.ingredients
                 .map { it.original }
-        val preparation = recipe.instructions.first().instructions
-                .map { it.action }
+        val instructions = recipe.instructions
+        val preparation = if (instructions.isEmpty()) emptyList() else instructions.first().steps.map { it.action }
         return Product(UUID.randomUUID().toString(), recipe.title, recipe.image, ingredients, preparation)
     }
 }
