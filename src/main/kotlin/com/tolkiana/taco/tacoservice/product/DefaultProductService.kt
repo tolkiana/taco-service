@@ -19,6 +19,6 @@ class DefaultProductService(val resourceService: ResourceService) : ProductServi
     }
 
     override fun getProducts(productType: ProductType) : List<Product> {
-        return products[productType]!!
+        return products[productType] ?: throw ServerException("The ProductType: $productType was not loaded.")
     }
 }
