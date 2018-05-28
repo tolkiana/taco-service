@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.transfer.TransferManager
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.tolkiana.taco.tacoservice.dto.Product
 import org.springframework.stereotype.Service
 import java.io.File
 
@@ -13,17 +14,19 @@ class AwsResourceService(private val objectMapper: ObjectMapper, private val ama
 
     private val bucket: String = "taco-app"
 
-    override fun uploadProduct(name: String, product: Any) {
+    override fun uploadProducts(name: String, product: List<Product>) {
         val content = objectMapper.writeValueAsBytes(product)
         val objectMetadata = ObjectMetadata()
         objectMetadata.contentLength = content.size.toLong()
         createTransferManager().upload(bucket, name, content.inputStream(), objectMetadata)
     }
 
-    override fun <T> getProduct(name: String, clazz: Class<T>): T {
+    override fun getProducts(name: String): List<Product> {
         val file = File.createTempFile("product-download-", ".tmp")
         createTransferManager().download(bucket, name, file).waitForCompletion()
-        return objectMapper.readValue(file, clazz)
+        val listType = objectMapper.typeFactory
+                .constructCollectionType(List::class.java, Product::class.java)
+        return objectMapper.readValue(file, listType)
     }
 
     private fun createTransferManager(): TransferManager {

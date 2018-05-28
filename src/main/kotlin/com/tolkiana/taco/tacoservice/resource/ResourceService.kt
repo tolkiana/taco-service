@@ -1,8 +1,10 @@
 package com.tolkiana.taco.tacoservice.resource
 
+import com.tolkiana.taco.tacoservice.dto.Product
+
 interface ResourceService {
 
-    fun uploadProduct(name: String, product: Any)
+    fun uploadProducts(name: String, product: List<Product>)
 
-    fun <T> getProduct(name: String, clazz: Class<T>): T
+    fun getProducts(name: String): List<Product>
 }
