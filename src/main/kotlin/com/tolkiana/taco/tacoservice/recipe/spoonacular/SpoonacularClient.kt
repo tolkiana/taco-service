@@ -1,7 +1,7 @@
-package com.tolkiana.taco.tacoservice.spoonacular
+package com.tolkiana.taco.tacoservice.recipe.spoonacular
 
-import com.tolkiana.taco.tacoservice.spoonacular.dto.Recipe
-import com.tolkiana.taco.tacoservice.spoonacular.dto.Search
+import com.tolkiana.taco.tacoservice.recipe.spoonacular.dto.Recipe
+import com.tolkiana.taco.tacoservice.recipe.spoonacular.dto.Search
 import org.springframework.cloud.netflix.feign.FeignClient
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestHeader

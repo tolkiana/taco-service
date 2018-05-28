@@ -1,4 +1,4 @@
-package com.tolkiana.taco.tacoservice.spoonacular.dto
+package com.tolkiana.taco.tacoservice.recipe.spoonacular.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
